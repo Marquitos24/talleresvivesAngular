@@ -1,0 +1,421 @@
+ <!-- app.component.html -->
+<div class="container mx-auto p-1">
+
+
+    <div class="w-full bg-blue-800 rounded">
+        <h1 class="text-center text-4xl font-bold text-yellow-400 mb-6 drop-shadow-lg titulo" 
+          style="text-shadow: 2px 2px 8px #ffd700;">TALLERES VIVES</h1>
+    </div>
+
+    <form [formGroup]="formularioTalleres" (ngSubmit)="submit()">
+
+        <div class="flex-1 flex-col md:flex-row gap-6">
+
+            <!-- SLIDERS Y TITULO -->
+            <div class="w-full md:w-12/12 flex gap-2 flex-col md:flex-row">
+            <!-- Slider principal -->
+                <div class="relative w-full h-72 overflow-hidden rounded-2xl border-2 border-yellow-400 shadow-lg mb-6">
+                    <img src="../coche1.jpg" class="absolute w-full h-full object-cover animate-slide1 rounded-2xl">
+                    <img src="../coche2.avif" class="absolute w-full h-full object-cover animate-slide2 rounded-2xl">
+                    <img src="../coche3.jpg" class="absolute w-full h-full object-cover animate-slide3 rounded-2xl">
+                    <img src="../coche4.jpg" class="absolute w-full h-full object-cover animate-slide4 rounded-2xl">
+                </div>
+
+                <!-- Slider secundario -->
+                <div class="relative w-full h-72 overflow-hidden rounded-2xl border-2 border-yellow-400 shadow-lg">
+                    <img src="../coche5.jpg" class="absolute w-full h-full object-cover animate-slide1 rounded-2xl">
+                    <img src="../coches6.jpg" class="absolute w-full h-full object-cover animate-slide2 rounded-2xl">
+                    <img src="../coche7.jpg" class="absolute w-full h-full object-cover animate-slide3 rounded-2xl">
+                    <img src="../coche8.jpg" class="absolute w-full h-full object-cover animate-slide4 rounded-2xl">
+                </div>
+            </div>
+
+
+                    <!-- FORMULARIO -->
+                <div class="w-full mb-4 bg-white bg-opacity-90 p-6 rounded-3xl shadow-2xl border-4 border-yellow-400 transition-transform transform hover:scale-105 hover:shadow-3xl">
+                    
+                    <!-- Datos factura -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <div class="flex items-center">
+                            <label for="nombreF" class=" bg-blue-800 text-white text-sm font-bold p-2 rounded-l-md w-36 text-center">Nombre factura<span class="text-red-600 ml-1">*</span></label>
+                            <input type="text" formControlName="nombreF" class="flex-1 border-2 border-yellow-400 rounded-r-md p-2 focus:border-blue-800 focus:ring focus:ring-blue-400">
+                            </div>
+                            <div class="mb-3">
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('nombreF')?.touched &&
+                                        formularioTalleres.get('nombreF')?.errors?.['required']">
+                                    El nombre de factura es obligatorio
+                                </span>
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('nombreF')?.touched &&
+                                        formularioTalleres.get('nombreF')?.errors?.['maxlength']">
+                                    El nombre de factura no debe superar los 100 caracteres
+                                </span>
+                            </div>
+                            
+
+                            <div class="flex items-center">
+                                <label for="nombreC" class="bg-blue-800 text-white font-bold text-sm p-2 rounded-l-md w-36 text-center">Nombre cliente<span class="text-red-600 ml-1">*</span></label>
+                                <input type="text" formControlName="nombreC" placeholder="Nombre" class="flex-1 border-2 border-yellow-400 rounded-r-md p-2 focus:border-blue-800 focus:ring focus:ring-blue-400">
+                            </div>
+                            <div class="mb-3">
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('nombreC')?.touched &&
+                                        formularioTalleres.get('nombreC')?.errors?.['required']">
+                                    Tu nombre es obligatorio
+                                </span>
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('nombreC')?.touched &&
+                                        formularioTalleres.get('nombreC')?.errors?.['maxlength']">
+                                    Tu nombre no puede superar los 100 caracteres
+                                </span>
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('nombreC')?.touched &&
+                                        formularioTalleres.get('nombreC')?.errors?.['minlength']">
+                                    Tu nombre no puede tener menos de 2 caracteres
+                                </span>
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('nombreC')?.touched &&
+                                        formularioTalleres.get('nombreC')?.errors?.['noNum']">
+                                    Introduce solo letras
+                                </span>
+                            </div>
+
+                            
+                            <div class="flex items-center">
+                            <label for="fecha" class="bg-blue-800 text-white font-bold text-sm p-3 rounded-l-md w-36 text-center">Fecha<span class="text-red-600 ml-1">*</span></label>
+                            <input type="text" formControlName="fecha"  placeholder="dd/mm/yyyy" class="flex-1 border-2 border-yellow-400 rounded-r-md p-2 focus:border-blue-800 focus:ring focus:ring-blue-400">
+                            </div>
+                            <div class="mb-3">
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('fecha')?.touched &&
+                                        formularioTalleres.get('fecha')?.errors?.['required']">
+                                    La fecha es obligatoria
+                                </span>
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('fecha')?.touched &&
+                                        formularioTalleres.get('fecha')?.errors?.['pattern']">
+                                    La fecha introducida no tiene el patrón correcto (procura introducir 0 en el mes)
+                                </span>
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('fecha')?.touched &&
+                                        formularioTalleres.get('fecha')?.errors?.['actual']">
+                                    La fecha ingresada no existe
+                                </span>
+                            </div>
+                            
+
+                            <div class="flex items-center">
+                            <label for="direccion" class="bg-blue-800 text-white font-bold text-sm p-3 rounded-l-md w-36 text-center">Dirección<span class="text-red-600 ml-1">*</span></label>
+                            <input type="text" formControlName="direc" placeholder="Direccion" class="flex-1 border-2 border-yellow-400 rounded-r-md p-2 focus:border-blue-800 focus:ring focus:ring-blue-400">
+                            </div>
+                            <div class="mb-3">
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('direc')?.touched &&
+                                        formularioTalleres.get('direc')?.errors?.['required']">
+                                    La dirección es obligatoria
+                                </span>
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('direc')?.touched &&
+                                        formularioTalleres.get('direc')?.errors?.['minlength']">
+                                    La dirección debe tener mas de 3 caracteres
+                                </span>
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('direc')?.touched &&
+                                        formularioTalleres.get('direc')?.errors?.['pattern']">
+                                    La dirección debe contener letras y números (ejemplo: 'Calle 123').
+                                </span>
+                            </div>
+                            
+
+                            <div class="flex items-center">
+                                <label for="cp" class="bg-blue-800 text-white font-bold text-sm p-3 rounded-l-md w-36 text-center">Código postal<span class="text-red-600 ml-1">*</span></label>
+                                <input type="text" formControlName="cp" placeholder="Código postal" class="flex-1 border-2 border-yellow-400 rounded-r-md p-2 focus:border-blue-800 focus:ring focus:ring-blue-400">
+                            </div>
+                            <div class="mb-3">
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('cp')?.touched &&
+                                        formularioTalleres.get('cp')?.errors?.['required']">
+                                    El código postal es obligatorio
+                                </span>
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('cp')?.touched &&
+                                        formularioTalleres.get('cp')?.errors?.['minlength']">
+                                    El código postal debe tener 5 números
+                                </span>
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('cp')?.touched &&
+                                        formularioTalleres.get('cp')?.errors?.['maxlength']">
+                                    El código postal debe tener 5 números
+                                </span>
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('cp')?.touched &&
+                                        formularioTalleres.get('cp')?.errors?.['noLetras']">
+                                    El código postal no debe contener letras
+                                </span>
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('cp')?.touched &&
+                                        formularioTalleres.get('cp')?.errors?.['provicias']">
+                                    El código postal no corresponde a ninguna provincia
+                                </span>
+                            </div>
+                            
+
+                            <div class="flex items-center">
+                                <label for="ciudad" class="bg-blue-800 text-white font-bold text-sm p-3 rounded-l-md w-36 text-center">Ciudad<span class="text-red-600 ml-1">*</span></label>
+                                <input type="text" formControlName="ciudad" placeholder="Ciudad" class="flex-1 border-2 border-yellow-400 rounded-r-md p-2 focus:border-blue-800 focus:ring focus:ring-blue-400">
+                            </div>
+                            <div class="mb-3">
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('ciudad')?.touched &&
+                                        formularioTalleres.get('ciudad')?.errors?.['required']">
+                                    La ciudad es obligatoria
+                                </span>
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('ciudad')?.touched &&
+                                        formularioTalleres.get('ciudad')?.errors?.['noNum']">
+                                    La ciudad no debe contener números
+                                </span>
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('ciudad')?.touched &&
+                                        formularioTalleres.get('ciudad')?.errors?.['ciudades']">
+                                    La ciudad introducida no es valida en España
+                                </span>
+
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <label for="ncn" class="bg-blue-800 text-white font-bold text-sm p-3 rounded-l-md w-36 text-center">NIE/CIF/NIF<span class="text-red-600 ml-1">*</span></label>
+                                <input type="text" formControlName="ncn"  placeholder="NIE/CIF/NIF" class="flex-1 border-2 border-yellow-400 rounded-r-md p-2 focus:border-blue-800 focus:ring focus:ring-blue-400">
+                            </div>
+                            <div class="mb-3">
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('ncn')?.touched &&
+                                        formularioTalleres.get('ncn')?.errors?.['required']">
+                                    El número de documento es obligatorio
+                                </span>
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('ncn')?.touched &&
+                                        formularioTalleres.get('ncn')?.errors?.['pattern']">
+                                    Formato inválido, debe ser NIE, CIF o NIF
+                                </span>
+                                
+                            </div>
+                            
+
+                            <div class="flex items-center">
+                                <label for="tlf" class="bg-blue-800 text-white font-bold text-sm p-1 rounded-l-md w-36 text-center">Telefono de contacto<span class="text-red-600 ml-1">*</span></label>
+                                <input type="text" formControlName="tlf" placeholder="Telefono" class="flex-1 border-2 border-yellow-400 rounded-r-md p-2 focus:border-blue-800 focus:ring focus:ring-blue-400">
+                            </div>
+                            <div class="mb-3">
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('tlf')?.touched &&
+                                        formularioTalleres.get('tlf')?.errors?.['required']">
+                                    El telefono es obligatorio
+                                </span>
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('tlf')?.touched &&
+                                        formularioTalleres.get('tlf')?.errors?.['pattern']">
+                                    Formato de número de telefono invalido, deben ser 9 numeros que empiecen por 6, 7, 8 o 9
+                                </span>
+                            </div>
+                            
+
+                            <div class="flex items-center">
+                                <label for="gmail" class="bg-blue-800 text-white font-bold text-sm p-1 rounded-l-md w-36 text-center">Correo electronico<span class="text-red-600 ml-1">*</span></label>
+                                <input type="text" formControlName="gmail"  placeholder="Correo electronico" class="flex-1 border-2 border-yellow-400 rounded-r-md p-2 focus:border-blue-800 focus:ring focus:ring-blue-400">
+                            </div>
+                            <div class="mb-3">
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('gmail')?.touched &&
+                                        formularioTalleres.get('gmail')?.errors?.['required']">
+                                    El correo electronico es obligatorio
+                                </span>
+                                <span class="error"
+                                    *ngIf="formularioTalleres.get('gmail')?.touched &&
+                                        formularioTalleres.get('gmail')?.errors?.['pattern']">
+                                    Formato de correo electronico invalido (X@gamil.com)
+                                </span>
+                            </div>
+                            
+                        </div>
+
+                
+                        <div class="flex items-center mb-4">
+                            <label for="prov" class="bg-blue-800 text-white font-bold p-3 text-sm rounded w-36 text-center">Provincia</label>
+                            <input type="text" formControlName="prov" placeholder="Añada el código postal" class="flex-1 border-2 border-yellow-400 rounded-r-md p-2 focus:border-blue-800 focus:ring focus:ring-blue-400">
+                        </div>
+                        
+
+                        <!-- Captcha -->
+                        <div class="flex items-center">
+                            <label for="captcha" class="text-black font-bold p-1 rounded-l-md text-sm w-40 text-center">Captcha <span class="text-red-600">*</span> = <span  class="mx-1">{{ numRandom1 }}</span> + <span class="mx-1">{{ numRandom2 }}</span></label>
+                            <input type="text" formControlName="captcha" id="captcha" class="flex border-2 w-12 rounded text-center p-2 focus:border-blue-800 focus:ring focus:ring-blue-400">
+                        </div>
+                        <br>
+                        <div class="mb-1">
+                            <span class="error"
+                                *ngIf="formularioTalleres.get('captcha')?.touched &&
+                                    formularioTalleres.get('captcha')?.errors?.['required']">
+                                Campo obligatorio
+                            </span>
+                            <span class="error"
+                                *ngIf="formularioTalleres.get('captcha')?.touched &&
+                                    formularioTalleres.get('captcha')?.errors?.['noLetras']">
+                                Debe ser un número
+                            </span>
+                            <span class="error"
+                                *ngIf="formularioTalleres.get('captcha')?.touched &&
+                                    formularioTalleres.get('captcha')?.errors?.['numInvalido']">
+                                Número Incorrecto
+                            </span>
+                        </div>
+                        
+                    </div>
+
+                </div>
+            
+
+        </div>
+
+        <div class="w-full mt-6">
+            <div class="mb-4">
+                <!-- -->
+                <button type="button" (click)="anadirFila()" class="px-4 py-2 bg-gradient-to-r from-blue-800 to-blue-500 text-yellow-400 font-bold rounded-xl shadow-lg hover:from-blue-500 hover:to-blue-800 hover:shadow-2xl transition-all">
+                    Añadir fila
+                </button>
+            </div>
+
+            <!-- Tabla dinámica de artículos -->
+             <!--  -->
+           
+                <div class="bg-blue-100 p-2 rounded-xl mb-3 space-y-1" *ngFor="let fila of filas; let i = index">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-2 p-2 border-b border-blue-400 items-end">
+
+                        <!-- Cantidad -->
+                        <div class="flex gap-2">
+                            <div class="w-5/12">
+                                <label class="block font-bold">Cantidad</label>
+                                <input type="text" [(ngModel)]="fila.cantidad"  [ngModelOptions]="{ standalone: true }" (blur)="validarCantidad(fila)" class="w-full border-2 border-yellow-400 rounded p-1 focus:ring focus:ring-blue-400">
+                            </div>
+                            
+                        
+                            <!-- Descripción -->
+                            <div>
+                                <label class="block font-bold">Descripción</label>
+                                <input type="text" [(ngModel)]="fila.desc" [ngModelOptions]="{ standalone: true }" (blur)="validarDescripcion(fila)" class="w-full border-2 border-yellow-400 rounded p-1 focus:ring focus:ring-blue-400">
+                            </div>
+                        </div>
+                            
+                        <!-- Precio e IVA% -->
+                        <div class="flex gap-2">
+                            <div class="w-1/2">
+                                <label class="block font-bold">Precio</label>
+                                <input type="text" [(ngModel)]="fila.prec"  [ngModelOptions]="{ standalone: true }" (blur)="validarPrecio(fila)" class="w-full border-2 border-yellow-400 rounded p-1 focus:ring focus:ring-blue-400">
+                            </div>
+                            <div class="w-1/2">
+                                
+                                <label class="block font-bold">IVA%</label>
+                                <select [(ngModel)]="fila.ivaPorc"  [ngModelOptions]="{ standalone: true }" (change)="calcularValores(fila); validarPorc(fila)" class="w-full border-2 border-yellow-400 rounded p-1">
+                                <option value="21">21</option>
+                                <option value="10">10</option>
+                                <option value="4">4</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- IVA e Importe -->
+                        <div class="flex gap-2">
+                            <div class="w-1/2">
+                                <label class="block font-bold">IVA</label>
+                                <input type="text" [value]="fila.iva | number:'1.2-2'"  readonly class="w-full border-2 border-yellow-400 rounded p-1 bg-gray-200">
+                            </div>
+                            <div class="w-1/2">
+                                <label class="block font-bold">Importe</label>
+                                <input type="text" [value]="fila.importe | number:'1.2-2'"  readonly class="w-full border-2 border-yellow-400 rounded p-1 bg-gray-200">
+                            </div>
+                        </div>
+
+                        <!-- Total y Borrar -->
+                        <div class="flex gap-2 items-center">
+                            <div class="w-1/2">
+                                <label class="block font-bold">TOTAL</label>
+                                <input type="text" [value]="fila.total | number:'1.2-2'" readonly class="w-full border-2 border-yellow-400 rounded p-1 bg-gray-200">
+                            </div>
+                            <div class="w-1/2">
+                                <button type="button"  (click)="borrarFila(i)"
+                                        class="w-full bg-red-600 text-white font-bold rounded p-2 hover:bg-red-700 transition-all">
+                                BORRAR
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                        <span *ngIf="fila.errores?.cantidad" class="error2">{{fila.errores?.cantidad}}</span>
+
+                        <span *ngIf="fila.errores?.desc" class="error2">{{fila.errores?.desc}}</span>
+
+                        <span *ngIf="fila.errores?.prec" class="error2">{{fila.errores?.prec}}</span>
+
+                        <span *ngIf="fila.errores?.ivaPorc" class="error2">{{fila.errores?.ivaPorc}}</span>
+
+                </div>
+                
+          
+            
+
+            <!-- Totales IVA -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+
+                <!-- Base IVA -->
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <label class="bg-blue-800 text-white font-bold p-2 rounded-l text-center w-36">Base IVA 21%</label>
+                        <input  readonly formControlName="baseIva21" class="flex-1 border-2 border-yellow-400 text-center rounded-r p-2 bg-gray-200">
+                    </div>
+                    <div class="flex items-center">
+                        <label class="bg-blue-800 text-white font-bold p-2 rounded-l text-center w-36">Base IVA 10%</label>
+                        <input  readonly formControlName="baseIva10" class="flex-1 border-2 border-yellow-400 text-center rounded-r p-2 bg-gray-200">
+                    </div>
+                    <div class="flex items-center">
+                        <label class="bg-blue-800 text-white font-bold p-2 rounded-l text-center w-36">Base IVA 4%</label>
+                        <input  readonly formControlName="baseIva4" class="flex-1 border-2 text-center border-yellow-400 rounded-r p-2 bg-gray-200">
+                    </div>
+                    
+                </div>
+
+                <!-- IVA -->
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <label class="bg-blue-800 text-white font-bold p-2 rounded-l text-center w-36">IVA 21%</label>
+                        <input  readonly formControlName="iva21" class="flex-1 border-2 border-yellow-400 text-center rounded-r p-2 bg-gray-200">
+                    </div>
+                    <div class="flex items-center">
+                        <label class="bg-blue-800 text-white font-bold p-2 rounded-l text-center w-36">IVA 10%</label>
+                        <input  readonly formControlName="iva10" class="flex-1 border-2 border-yellow-400 text-center rounded-r p-2 bg-gray-200">
+                    </div>
+                    <div class="flex items-center">
+                        <label class="bg-blue-800 text-white font-bold p-2 rounded-l text-center w-36">IVA 4%</label>
+                        <input  readonly formControlName="iva4" class="flex-1 border-2 border-yellow-400 text-center rounded-r p-2 bg-gray-200">
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center mb-6">
+                <div class="flex flex-col items-center">
+                    <label class=" bg-blue-800 text-white font-bold p-2 rounded text-2xl text-center w-40">Total</label>
+                    <input  readonly formControlName="baseIvaTotal" class="flex-1 w-41 text-2xl text-center border-2 border-yellow-400 rounded p-1 bg-gray-200">
+                </div>
+            </div>
+            
+            <button type="submit" class="block mx-auto mb-3 mt-6 px-6 py-3 bg-gradient-to-r from-blue-800 to-blue-500 text-yellow-400 font-bold rounded-xl shadow-lg hover:from-blue-500 hover:to-blue-800 hover:shadow-2xl transition-all">Generar Factura</button>
+        </div>
+
+        
+    </form>
+</div>
+    
+
+
+    

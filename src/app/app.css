@@ -1,0 +1,25 @@
+@keyframes slide {
+  0%, 30%, 100% { opacity: 0; }
+  5%, 25% { opacity: 1; }
+}
+
+.animate-slide1 { animation: slide 20s infinite 0s; }
+.animate-slide2 { animation: slide 20s infinite 5s; }
+.animate-slide3 { animation: slide 20s infinite 10s; }
+.animate-slide4 { animation: slide 20s infinite 15s; }
+
+.titulo{
+  text-transform: uppercase;
+  animation: aparecer 1s ease-out;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
